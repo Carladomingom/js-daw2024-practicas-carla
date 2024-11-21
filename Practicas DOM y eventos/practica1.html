@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cambio de fondo</title>
+    <style>
+      #imagen {
+        background-color: black;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-size: cover;
+        background-position: center;
+      }
+
+      h1 {
+        color: white;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="imagen">
+      <h1>Pulsa ALT+F12 para cambiar el fondo</h1>
+    </div>
+
+    <script>
+      document.addEventListener('keydown', (event) => {
+        if (event.altKey && event.key === 'F12') {
+          const contenedor = document.getElementById('imagen');
+          contenedor.style.backgroundImage = `url('https://picsum.photos/1920/1080')`;
+          contenedor.innerHTML = '';
+        }
+      });
+    </script>
+  </body>
+</html>

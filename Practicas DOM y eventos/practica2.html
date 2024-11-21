@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Validación de formulario</title>
+  </head>
+  <body>
+    <form id="formulario">
+      <div>
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" />
+        <span id="error-email" style="color: red; display: none"
+          >Formato: xxxx@yyyy.zzzz</span
+        >
+      </div>
+      <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" />
+        <span id="error-password" style="color: red; display: none"
+          >Debe tener entre 8 y 10 caracteres</span
+        >
+      </div>
+      <div>
+        <button type="submit" id="enviar" disabled>Enviar</button>
+      </div>
+    </form>
+
+    <script>
+      const emailInput = document.getElementById('email');
+      const passwordInput = document.getElementById('password');
+      const errorEmail = document.getElementById('error-email');
+      const errorPassword = document.getElementById('error-password');
+      const enviarBtn = document.getElementById('enviar');
+
+      let emailValido = false;
+      let passwordValido = false;
+
+      emailInput.addEventListener('blur', () => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (emailRegex.test(emailInput.value)) {
+          errorEmail.style.display = 'none';
+          emailValido = true;
+        } else {
+          errorEmail.style.display = 'inline';
+          emailValido = false;
+        }
+        validarFormulario();
+      });
+
+      passwordInput.addEventListener('blur', () => {
+        if (
+          passwordInput.value.length >= 8 &&
+          passwordInput.value.length <= 10
+        ) {
+          errorPassword.style.display = 'none';
+          passwordValido = true;
+        } else {
+          errorPassword.style.display = 'inline';
+          passwordValido = false;
+        }
+        validarFormulario();
+      });
+
+      emailInput.addEventListener('input', () => {
+        errorEmail.style.display = 'none';
+      });
+
+      passwordInput.addEventListener('input', () => {
+        errorPassword.style.display = 'none';
+      });
+
+      function validarFormulario() {
+        enviarBtn.disabled = !(emailValido && passwordValido);
+      }
+    </script>
+  </body>
+</html>
