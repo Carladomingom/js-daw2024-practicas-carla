@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 1</title>
+  </head>
+  <body>
+    <div id="contenido"></div>
+    <script>
+      function setCookie(nombre, valor, dias) {
+        const fecha = new Date();
+        fecha.setTime(fecha.getTime() + dias * 24 * 60 * 60 * 1000);
+        document.cookie = `${nombre}=${valor};expires=${fecha.toUTCString()};path=/`;
+      }
+
+      function getCookie(nombre) {
+        const cookies = document.cookie.split('; ');
+        for (let cookie of cookies) {
+          const [clave, valor] = cookie.split('=');
+          if (clave === nombre) return valor;
+        }
+        return null;
+      }
+
+      const nombreUsuario = getCookie('nombreUsuario');
+      const contenidoDiv = document.getElementById('contenido');
+
+      if (nombreUsuario) {
+        contenidoDiv.innerHTML = `<h1>Bienvenido, ${nombreUsuario}!</h1>`;
+      } else {
+        contenidoDiv.innerHTML = `
+        <input type="text" id="nombre" placeholder="Ingresa tu nombre">
+        <button onclick="guardarNombre()">Guardar</button>
+      `;
+      }
+
+      function guardarNombre() {
+        const nombre = document.getElementById('nombre').value;
+        if (nombre) {
+          setCookie('nombreUsuario', nombre, 7);
+          location.reload();
+        }
+      }
+    </script>
+  </body>
+</html>

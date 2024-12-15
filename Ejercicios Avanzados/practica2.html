@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Temporizador</title>
+  </head>
+  <body>
+    <div id="resultado"></div>
+    <script>
+      function temporizador(ms) {
+        return new Promise((resolve, reject) => {
+          const temporizadorID = setTimeout(
+            () => resolve('Tiempo concluido'),
+            ms
+          );
+
+          setTimeout(() => {
+            clearTimeout(temporizadorID);
+            reject('El tiempo no va bien');
+          }, ms * 2);
+        });
+      }
+
+      (async () => {
+        const resultadoDiv = document.getElementById('resultado');
+        try {
+          const mensaje = await temporizador(5000);
+          resultadoDiv.textContent = mensaje;
+        } catch (error) {
+          resultadoDiv.textContent = error;
+        }
+      })();
+    </script>
+  </body>
+</html>
