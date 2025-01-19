@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Video</title>
+    <style>
+      #info {
+        margin-top: 10px;
+        font-style: italic;
+      }
+    </style>
+    <script>
+      window.onload = () => {
+        const video = document.getElementById('video');
+        const info = document.getElementById('info');
+
+        video.addEventListener('click', () => {
+          if (video.paused) video.play();
+          else video.pause();
+        });
+
+        video.addEventListener('contextmenu', (e) => {
+          e.preventDefault();
+          const duration = video.duration;
+          const minutes = Math.floor(duration / 60);
+          const seconds = Math.floor(duration % 60);
+          info.textContent = `Duración del video: ${minutes} minutos y ${seconds} segundos.`;
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <h1>Video Práctica</h1>
+    <video id="video" width="600" controls>
+      <source src="example_MP4.mp4" type="video/mp4" />
+      Tu navegador no soporta el elemento de video.
+    </video>
+    <p id="info"></p>
+  </body>
+</html>

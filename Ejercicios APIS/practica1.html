@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica 1</title>
+    <script>
+        const showNotification = () => {
+            const notification = new Notification("Nuevo video disponible", {
+                body: "Haz clic aquí para verlo.",
+                icon: "icon.png",
+            });
+            notification.onclick = () => window.location.href = "video_page.html";
+        };
+
+        const startCountdown = () => {
+            let counter = 5;
+            const countdown = document.getElementById("countdown");
+            const interval = setInterval(() => {
+                countdown.textContent = counter;
+                if (counter === 0) {
+                    clearInterval(interval);
+                    if (Notification.permission === "granted") {
+                        showNotification();
+                    } else {
+                        Notification.requestPermission().then(permission => {
+                            if (permission === "granted") showNotification();
+                        });
+                    }
+                }
+                counter--;
+            }, 1000);
+        };
+
+        window.onload = startCountdown;
+    </script>
+</head>
+<body>
+    <h1>Práctica 1: Notificación con cuenta regresiva</h1>
+    <p>Cuenta atrás: <span id="countdown">5</span></p>
+</body>
+</html>

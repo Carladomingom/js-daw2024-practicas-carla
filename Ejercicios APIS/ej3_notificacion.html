@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3</title>
+</head>
+<body>
+    <h1>Ejercicio 3: Notificación</h1>
+    <button id="notifyButton">Mostrar Notificación</button>
+    <script>
+        const notifyButton = document.getElementById("notifyButton");
+
+        notifyButton.addEventListener("click", () => {
+            if (Notification.permission === "granted") {
+                new Notification("¡Hola!", { body: "Esto es una notificación", icon: "icon.png" });
+            } else if (Notification.permission !== "denied") {
+                Notification.requestPermission().then(permission => {
+                    if (permission === "granted") {
+                        new Notification("¡Hola!", { body: "Esto es una notificación", icon: "icon.png" });
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

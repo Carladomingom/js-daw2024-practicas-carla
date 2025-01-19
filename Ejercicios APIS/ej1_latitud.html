@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1</title>
+    <script>
+        window.onload = () => {
+            navigator.geolocation.getCurrentPosition((position) => {
+                const lat = position.coords.latitude;
+                if (lat > 0 && lat < 23.5 || lat > -23.5 && lat < 0) {
+                    document.body.style.backgroundColor = "yellow"; // Ecuador
+                } else if (lat >= 23.5) {
+                    document.body.style.backgroundColor = "blue"; // Norte
+                } else {
+                    document.body.style.backgroundColor = "green"; // Sur
+                }
+            }, () => alert("No se pudo obtener la ubicación."));
+        };
+    </script>
+</head>
+<body>
+    <h1>Ejercicio 1: Cambiar fondo por latitud</h1>
+    <p>El color del fondo cambia según la latitud del usuario.</p>
+</body>
+</html>
